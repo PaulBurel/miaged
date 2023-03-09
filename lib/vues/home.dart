@@ -11,9 +11,10 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  int selectedIndex = 0;
   @override
   Widget build(BuildContext context) {
-    int selectedIndex = 0;
+    
     final pages = [const Item(), const Item(), const Profile()];
 
     void onItemTapped(int index) {
