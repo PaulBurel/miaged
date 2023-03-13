@@ -93,22 +93,8 @@ class _ItemState extends State<Item> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: TabBar(
-        controller: _tabController,
-        tabs: tabs,
-        onTap: _filterItem,
-        isScrollable: true,
-        labelStyle: const TextStyle(fontSize: 20),
-        labelColor: Colors.black,
-        unselectedLabelColor: Colors.grey,
-        indicatorColor: Colors.black,
-      ),
-      body: GridView.builder(
+      Widget body = GridView.builder(
         itemCount: articles.length,
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
-        ),
         itemBuilder: (context, index) {
           return GestureDetector(
             onTap: () {
@@ -125,17 +111,37 @@ class _ItemState extends State<Item> with TickerProviderStateMixin {
               children: [
                 ClipRRect(
                   borderRadius: BorderRadius.circular(10),
-                  child: Image.network(articles[index].image, fit: BoxFit.cover),
+                  child: Image.network(articles[index].image, height: 300, fit: BoxFit.cover),
                 ),
-                Image.network(articles[index].image),
-                Text(articles[index].nom, style: const TextStyle(fontSize: 20)),
-                Text(articles[index].taille, style: const TextStyle(fontSize: 20)),
-                Text(articles[index].prix, style: const TextStyle(fontSize: 20)),
+                const SizedBox(height: 10),
+                Text(articles[index].nom, style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+                Text('${articles[index].prix.toString()}€', style: const TextStyle(fontSize: 10)),
+                Text(articles[index].taille, style: const TextStyle(fontSize: 10)),
               ],
             ),
           );
         },
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2,
+          crossAxisSpacing: 10,
+          childAspectRatio: 223 / 350
+        ),
+        padding: const EdgeInsets.all(10),
+        shrinkWrap: false,
+        
+      );
+    return Scaffold(
+      appBar: TabBar(
+        controller: _tabController,
+        tabs: tabs,
+        onTap: _filterItem,
+        isScrollable: true,
+        labelStyle: const TextStyle(fontSize: 20),
+        labelColor: Colors.black,
+        unselectedLabelColor: Colors.grey,
+        indicatorColor: Colors.black,
       ),
+      body: body,
     );
   }
 }

@@ -2,7 +2,7 @@ class Article {
   String nom;
   String marque;
   String image;
-  String prix;
+  double prix;
   String taille;
   String type;
   String id;

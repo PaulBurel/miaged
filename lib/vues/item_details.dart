@@ -3,7 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import '../classes_definition/article.dart';
 
 class ItemDetails extends StatefulWidget {
-  var id;
+  var id = "";
 
   ItemDetails({super.key, required this.id});
 
@@ -13,12 +13,12 @@ class ItemDetails extends StatefulWidget {
 }
 
 class _ItemDetailsState extends State<ItemDetails> {
-  Article article = Article("", "", "", "", "", "", "");
+  Article article = Article("", "", "", 0, "", "", "");
   List<Article> articles = [];
   String itemID = "";
 
   Future<Article> getArticles(String id) async {
-    Article article = Article("", "", "", "", "", "", "");
+    Article article = Article("", "", "", 0, "", "", "");
     CollectionReference collectionReference = FirebaseFirestore.instance.collection('articles');
     await collectionReference.doc(id).get().then((value) {
       article = Article(value["nom"], value["marque"], value["image"],
@@ -90,12 +90,12 @@ class _ItemDetailsState extends State<ItemDetails> {
       ),
       body: ListView(
         children: [
-          Image.network(article.image),
-          Text(article.nom),
-          Text(article.marque),
-          Text(article.prix),
-          Text(article.taille),
-          Text(article.type),
+          Image.network(article.image, height: 600, fit: BoxFit.cover),
+          Text(article.nom, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 35), textAlign: TextAlign.center),
+          Text(article.marque, style: const TextStyle(fontSize: 20), textAlign: TextAlign.center),
+          Text('${article.prix.toString()}€', style: const TextStyle(fontSize: 20), textAlign: TextAlign.center),
+          Text('Taile : ${article.taille}', style: const TextStyle(fontSize: 20), textAlign: TextAlign.center),
+          Text(article.type, style: const TextStyle(fontSize: 20), textAlign: TextAlign.center),
           if (article.id != "") addToCart else removeToCart,      
         ],
       ),

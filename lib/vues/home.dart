@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'item.dart';
 import 'profile.dart';
+import 'shopping_cart.dart';
 
 class Home extends StatefulWidget {
   static String tag = 'home-page';
@@ -15,13 +16,11 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     
-    final pages = [const Item(), const Item(), const Profile()];
+    final pages = [const Item(), const ShoppingCart(), const Profile()];
 
     void onItemTapped(int index) {
       setState(() {
         selectedIndex = index;
-        print(selectedIndex);
-        print(pages[selectedIndex]);
       });
     }
 
@@ -30,13 +29,14 @@ class _HomeState extends State<Home> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('MIAGED'),
+        automaticallyImplyLeading: false,
       ),
       body: body,
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
-            label: 'Accueil',
+            label: 'Acheter',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.shopping_cart),
@@ -48,7 +48,7 @@ class _HomeState extends State<Home> {
           ),
         ],
         currentIndex: selectedIndex,
-        selectedItemColor: Colors.amber[800],
+        selectedItemColor: const Color.fromARGB(255, 0, 157, 255),
         onTap: onItemTapped,
       ),
     );
