@@ -5,7 +5,7 @@
 ### Page Login
   - Connexion avec vérification de l'user et password dans firebase
   - Mot de passe non visible 
-  Informations de connexion :
+  - Informations de connexion :
     Mail : test@gmail.com
     Mot de passe : 1234
   - Si mauvais mot de passe/user donné in informe l'utilisateur
